@@ -44,17 +44,22 @@ Traveller.prototype.getJourneysByMinDistance = function (minDistance) {
 }
 
 
-Traveller.prototype.calculateTotalDistanceTravelled = function (totalDistance) {
+Traveller.prototype.calculateTotalDistanceTravelled = function () {
 
-  return this.journeys.reduce((journey) => {
-    return (journey.distance + totalDistance)
-
+  return this.journeys.reduce((totalDistance, journey) => {
+    return totalDistance + journey.distance
   }, 0)
 };
-
+// array.map(item => item.age)
+//   .filter((value, index, self) => self.indexOf(value) === index)
 Traveller.prototype.getUniqueModesOfTransport = function () {
+  result = this.journeys.map((journey) => {
+    return journey.transport
+  }).filter((transport, index, result) => {
+    result.indexOf(transport) === index;
+  })
+}
 
-};
 
 
 module.exports = Traveller;
